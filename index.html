@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- University Title -->
+  <h1 class="title">UNIVERSITY OF ENGINEERING & MANAGEMENT, KOLKATA</h1>
+
+  <div class="login-container">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <select id="role" required>
+        <option value="">-- Select Role --</option>
+        <option value="user">User</option>
+        <option value="admin">Admin</option>
+      </select>
+
+      <input class="cred-box" type="email" id="email" placeholder="Email" required>
+      <input class="cred-box" type="password" id="password" placeholder="Password" required>
+      <button class="submit-btn" type="submit">Login</button>
+    </form>
+    <p id="message" class="message"></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

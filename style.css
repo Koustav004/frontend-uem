@@ -1,0 +1,140 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f3f4f6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.title {
+  font-size: 45px;
+  font-weight: bold;
+  color: #4f46e5;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start; /* aligns items at the top vertically */
+  justify-content: center; /* optional → centers items horizontally */
+  height: 40vh; 
+  align-items: flex-start; ;
+  text-align: center;
+
+}
+
+.login-container {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 300px;
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.login-container select,
+.login-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 10px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login-container button:hover {
+  background: #4338ca;
+}
+
+.message {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+/* General Page Styling */
+body {
+  font-family: Arial, sans-serif;
+  background: #f3f4f6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Title */
+.title {
+  font-size: 26px;
+  font-weight: bold;
+  color: #4f46e5;
+  margin-bottom: 20px;
+  text-align: center;
+  padding: 0 10px;
+}
+
+/* Login/OTP Box */
+.login-container {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  width: 320px;
+}
+
+/* Heading inside box */
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Inputs and Select */
+.login-container input,
+.login-container select {
+  width: 100%;
+  padding: 10px 0px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Submit Button */
+.submit-btn {
+  width: 100%;
+  padding: 10px;
+  background: #271ec9;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: #4338ca;
+}
+
+/* Message Display */
+.message {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
