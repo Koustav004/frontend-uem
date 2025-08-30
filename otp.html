@@ -7,14 +7,32 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1 class="title">UNIVERSITY OF ENGINEERING & MANAGEMENT, KOLKATA</h1>
+   <!-- University Title -->
+   <header class="header">
+      <figure class="logo left">
+          <img src="./assets/images/UEMKolkata.png" alt="UEM Logo">
+      </figure>
+
+      <h1 class="heading">UNIVERSITY OF ENGINEERING AND MANAGEMENT</h1>
+
+      <figure class="logo right">
+        <img src="./assets/images/IEMKolkata.png" alt="IEM Logo">
+      </figure>
+   </header>
 
   <div class="login-container">
     <h2>OTP Verification</h2>
+
+    
+
+    <!-- OTP Form -->
     <form id="otpForm">
-      <input type="text" id="otp" placeholder="Enter OTP" required>
+      <input type="text" id="otp" autofocus placeholder="Enter OTP" required>
+      <!-- Get OTP Button -->
+    <button id="getOtpBtn" class="submit-btn" type="button">Get OTP</button>
       <button class="submit-btn" type="submit">Verify OTP</button>
     </form>
+
     <p id="otpMessage" class="message"></p>
   </div>
 

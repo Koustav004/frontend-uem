@@ -8,7 +8,18 @@
 </head>
 <body>
   <!-- University Title -->
-  <h1 class="title">UNIVERSITY OF ENGINEERING & MANAGEMENT, KOLKATA</h1>
+  <header class="header">
+    <figure class="logo left">
+        <img src="./assets/images/UEMKolkata.png" alt="UEM Logo" >
+    </figure>
+
+    <h1 class="heading">UNIVERSITY OF ENGINEERING AND MANAGEMENT</h1>
+
+    <figure class="logo right">
+      <img src="./assets/images/IEMKolkata.png" alt="IEM Logo" >
+    </figure>
+  </header>
+   
 
   <div class="login-container">
     <h2>Login</h2>
@@ -19,11 +30,12 @@
         <option value="admin">Admin</option>
       </select>
 
-      <input class="cred-box" type="email" id="email" placeholder="Email" required>
+      <input class="cred-box" type="email" id="email" autofocus placeholder="Email" required>
       <input class="cred-box" type="password" id="password" placeholder="Password" required>
       <button class="submit-btn" type="submit">Login</button>
     </form>
     <p id="message" class="message"></p>
+
   </div>
 
   <script src="script.js"></script>
