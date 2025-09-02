@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- University Title -->
+  <header class="header">
+    <figure class="logo left">
+        <img src="./assets/images/UEMKolkata.png" alt="UEM Logo" >
+    </figure>
+
+    <h1 class="heading">UNIVERSITY OF ENGINEERING AND MANAGEMENT</h1>
+
+    <figure class="logo right">
+      <img src="./assets/images/IEMKolkata.png" alt="IEM Logo" >
+    </figure>
+  </header>
+
+    <div class="profile-container">
+        <!-- Cover Section -->
+        <div class="cover-section">
+            <div class="department-name" id="department">Department Name</div>
+        </div>
+
+        <!-- Profile Info Section -->
+        <div class="profile-main">
+            <!-- Left Column: Profile Picture & Basic Info -->
+            <div class="left-column">
+                <img src="https://via.placeholder.com/150" alt="Profile Picture" id="profilePic" class="profile-pic">
+                <h2 id="fullName">Guest User</h2>
+                <p id="designation">Role / Designation</p>
+                <p id="address">Address, City, State, Country</p>
+                <p id="contact">Email: example@mail.com | Phone: +91-XXXXXXXXXX</p>
+                <p id="dob">Date of Birth: DD/MM/YYYY</p>
+                <p id="gender">Gender: Prefer not to say</p>
+                <p id="github"><a href="#">GitHub</a></p>
+                <p id="linkedin"><a href="#">LinkedIn</a></p>
+                <button id="print">➕ print</button>
+            </div>
+
+<!-- Right Column: Achievements -->
+<div class="right-column">
+    <h3>Achievements</h3>
+    <div class="achievements-content">
+      <ul id="achievementsList">
+          <li>Achievement 1</li>
+          <li>Achievement 2</li>
+          <li>Achievement 3</li>
+      </ul>
+      <div class="achievement-buttons">
+        <button id="addAchievementBtn">➕ Add Achievement</button>
+        <button id="removeAchievementBtn">➖ Remove Achievement</button>
+      </div>
+    </div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -173,110 +173,207 @@ if (otpForm) {
   });
 }
 
-
-// ---------- DASHBOARD LOGIC ----------
-// Dummy Users DB
-const usersDB = {
-  "101": { id: "101", name: "Alice Johnson", email: "alice@example.com" },
-  "102": { id: "102", name: "Bob Smith", email: "bob@example.com" },
-  "103": { id: "103", name: "Charlie Brown", email: "charlie@example.com" }
-};
-
-// Load previous users from localStorage
-let addedUsers = JSON.parse(localStorage.getItem("addedUsers")) || [];
-
-// Search user by ID
-function searchUser() {
-  const searchInput = document.getElementById("searchInput");
-  if (!searchInput) return;
-
-  const searchId = searchInput.value.trim();
-  const userDetails = document.getElementById("userDetails");
-
-  if (usersDB[searchId]) {
-    const user = usersDB[searchId];
-    userDetails.innerHTML = `
-      <h3>${user.name}</h3>
-      <p>ID: ${user.id}</p>
-      <p>Email: ${user.email}</p>
-      <button onclick="addUser('${user.id}')">Add User</button>
-    `;
-    userDetails.classList.remove("hidden");
-  } else {
-    userDetails.innerHTML = "<p style='color:red;'>User not found!</p>";
-    userDetails.classList.remove("hidden");
-  }
-}
-
-// Add user to list
-function addUser(userId) {
-  const user = usersDB[userId];
-  if (!addedUsers.find(u => u.id === user.id)) {
-    addedUsers.push(user);
-    saveUsers();
-    renderAddedUsers();
-  }
-  document.getElementById("userDetails").classList.add("hidden");
-  document.getElementById("searchInput").value = "";
-}
-
-// Remove user from list
-function removeUser(userId) {
-  addedUsers = addedUsers.filter(u => u.id !== userId);
-  saveUsers();
-  renderAddedUsers();
-}
-
-// Save users to localStorage
-function saveUsers() {
-  localStorage.setItem("addedUsers", JSON.stringify(addedUsers));
-}
-
-// Render users (current + previous)
-function renderAddedUsers() {
-  const addedUsersDiv = document.getElementById("addedUsers");
-  if (!addedUsersDiv) return;
-
-  addedUsersDiv.innerHTML = "";
-
-  if (addedUsers.length === 0) {
-    addedUsersDiv.innerHTML = "<p>No users added yet.</p>";
-    return;
-  }
-
-  addedUsers.forEach(user => {
-    const div = document.createElement("div");
-    div.classList.add("card");
-    div.innerHTML = `
-      <h3>${user.name}</h3>
-      <p>Email: ${user.email}</p>
-      <button class="remove-btn" onclick="removeUser('${user.id}')">Remove</button>
-    `;
-    addedUsersDiv.appendChild(div);
-  });
-}
-
-// ---------- ADMIN PROFILE (Dynamic) ----------
-const admin = {
-  name: "John Doe",
-  email: "admin@uem.edu.in",
-  phone: "+91 9876543210",
-  userId: "ADM001",
-  image: "./assets/images/admin.png"
-};
-
-function loadAdminProfile() {
-  if (document.getElementById("adminName")) {
-    document.getElementById("adminName").textContent = "Admin Name: " + admin.name;
-    document.getElementById("adminEmail").textContent = "Email: " + admin.email;
-    document.getElementById("adminPhone").textContent = "Phone: " + admin.phone;
-    document.getElementById("adminUserId").textContent = "User ID: " + admin.userId;
-    document.getElementById("adminImage").src = admin.image;
-  }
-}
-
 // Auto render previous users + admin profile on dashboard load
 window.onload = () => {
   renderAddedUsers();
   loadAdminProfile();
 };
+// ---------- PROFILE (Dynamic) ----------
+
+
+document.addEventListener("DOMContentLoaded", async () => {
+    try {
+        // Show loading state
+        showLoadingState();
+
+        // Get the email from sessionStorage
+        const email = sessionStorage.getItem("otpEmail");
+
+        if (!email) {
+            throw new Error("No email found in session. Please login again.");
+        }
+
+        console.log("Making API call at:", new Date().toISOString());
+
+        // Send email in request body using POST
+        const response = await fetch("http://localhost:8000/auth/profile", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email }),
+            credentials: 'include'
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (data.success && data.user) {
+            populateProfile(data.user);
+            hideLoadingState();
+        } else {
+            throw new Error(data.message || "Failed to load profile data");
+        }
+
+    } catch (err) {
+        console.error("Error fetching profile:", err);
+        showErrorState(err.message);
+    }
+});
+
+function showLoadingState() {
+    // Show loading indicators
+    document.getElementById("fullName").textContent = "Loading...";
+    document.getElementById("designation").textContent = "Loading...";
+    document.getElementById("department").textContent = "Loading...";
+}
+
+function hideLoadingState() {
+    // Loading state will be replaced by actual data
+    console.log("Profile loaded successfully");
+}
+
+function showErrorState(errorMessage) {
+    document.getElementById("fullName").textContent = "Error loading profile";
+    document.getElementById("designation").textContent = errorMessage;
+
+    // You could also show a proper error message
+    const errorDiv = document.createElement("div");
+    errorDiv.className = "error-message";
+    errorDiv.style.cssText = "background: #fee; color: #c33; padding: 10px; margin: 10px; border-radius: 4px;";
+    errorDiv.textContent = `Error: ${errorMessage}. Please refresh the page or contact support.`;
+    document.querySelector(".profile-container").prepend(errorDiv);
+}
+
+function populateProfile(user) {
+    // Update department
+    document.getElementById("department").textContent = user.department || "Department Name";
+
+    // Update name - handle middle name properly
+    const middleName = user.middleName ? ` ${user.middleName} ` : " ";
+    document.getElementById("fullName").textContent = `${user.firstName || "Guest"}${middleName}${user.lastName || "User"}`;
+
+    // Update designation/role
+    document.getElementById("designation").textContent = user.role || "Faculty";
+
+    // onine image pull if no image was there
+    function getDefaultAvatar(firstName = "User", lastName = "") {
+        const name = `${firstName} ${lastName}`.trim() || "User";
+        return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&size=150&background=007bff&color=ffffff`;
+    }
+
+    // Update profile picture
+    const profilePic = document.getElementById("profilePic");
+    profilePic.src = user.profilePicURL || getDefaultAvatar(user.firstName, user.lastName);
+
+    profilePic.onerror = () => {
+        profilePic.src = getDefaultAvatar(user.firstName, user.lastName);
+    };
+
+    // Update address
+    if (user.address && user.address.length > 0) {
+        const addr = user.address[0];
+        const addressParts = [
+            addr.address_line_one,
+            addr.district,
+            addr.state,
+            addr.country
+        ].filter(part => part); // Remove empty parts
+
+        document.getElementById("address").textContent = addressParts.join(", ");
+    } else {
+        document.getElementById("address").textContent = "Address not provided";
+    }
+
+    // Update contact info
+    let contactInfo = "";
+
+    // Handle email - check if it's an array or string
+    if (user.email) {
+        const emails = Array.isArray(user.email) ? user.email : [user.email];
+        contactInfo += `Email: ${emails.join(", ")}`;
+    }
+
+    // Handle phone numbers
+    if (user.phone && user.phone.length > 0) {
+        const phones = user.phone.map(p => `+${p.countryCode}-${p.mobileNumber}`);
+        contactInfo += contactInfo ? ` | Phone: ${phones.join(", ")}` : `Phone: ${phones.join(", ")}`;
+    }
+
+    document.getElementById("contact").textContent = contactInfo || "Contact info not provided";
+
+    // Update date of birth
+    if (user.date_of_birth) {
+        const dob = new Date(user.date_of_birth);
+        document.getElementById("dob").textContent = `Date of Birth: ${dob.toLocaleDateString()}`;
+    } else {
+        document.getElementById("dob").textContent = "Date of Birth: Not provided";
+    }
+
+    // Update gender
+    document.getElementById("gender").textContent = `Gender: ${user.gender || "Prefer not to say"}`;
+
+    // Update social links
+    const githubElement = document.getElementById("github");
+    if (user.githubURL) {
+        githubElement.innerHTML = `<a href="${user.githubURL}" target="_blank" rel="noopener noreferrer">GitHub</a>`;
+    } else {
+        githubElement.innerHTML = "";
+    }
+
+    const linkedinElement = document.getElementById("linkedin");
+    if (user.linkdinURL) {
+        linkedinElement.innerHTML = `<a href="${user.linkdinURL}" target="_blank" rel="noopener noreferrer">LinkedIn</a>`;
+    } else {
+        linkedinElement.innerHTML = "";
+    }
+
+    // Update achievements
+    const achievementsList = document.getElementById("achievementsList");
+    achievementsList.innerHTML = ""; // Clear existing content
+
+    if (user.achivementSchema && user.achivementSchema.length > 0) {
+        user.achivementSchema.forEach(achievement => {
+            const li = document.createElement("li");
+            li.textContent = achievement.title || "Untitled Achievement";
+            achievementsList.appendChild(li);
+        });
+    } else {
+        const li = document.createElement("li");
+        li.textContent = "No achievements yet.";
+        li.style.fontStyle = "italic";
+        li.style.color = "#666";
+        achievementsList.appendChild(li);
+    }
+}
+
+// Optional: Add a retry function
+function retryLoadProfile() {
+    location.reload(); // Simple refresh, or you could call the load function again
+}
+
+const achievementsList = document.getElementById("achievementsList");
+const addBtn = document.getElementById("addAchievementBtn");
+const removeBtn = document.getElementById("removeAchievementBtn");
+
+// Add achievement
+addBtn.addEventListener("click", () => {
+    const newAchievement = prompt("Enter a new achievement:");
+    if (newAchievement && newAchievement.trim() !== "") {
+        const li = document.createElement("li");
+        li.textContent = newAchievement;
+        achievementsList.appendChild(li);
+    }
+});
+
+// Remove last achievement
+removeBtn.addEventListener("click", () => {
+    if (achievementsList.lastElementChild) {
+        achievementsList.removeChild(achievementsList.lastElementChild);
+    } else {
+        alert("No achievements to remove!");
+    }
+});

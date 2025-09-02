@@ -56,149 +56,6 @@ h1, h2 {
   height: 60px;
 }
 
-/* --------- ADMIN PROFILE --------- */
-.admin-profile {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-grow: 2;
-  font-size: 20px;
-  gap: 20px;
-  background: #fff;
-  padding: 2%;
-  border-radius: 12px;
-  /* extra top margin since header is absolute */
-  margin-top: 100px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  height: 40rem;
-  width: 95%;
-}
-
-/* Layout Grid */
-.grid-container {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  grid-gap: 15px;
-  padding: 15px;
-  flex-grow: 1;
-}
-
-.admin-profile img {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  border: 2px solid #444;
-  display: flex;
-  align-items:flex-start;
-  justify-content: space-between;
-  position: absolute;
-  top: 30%;
-}
-
-.admin-info {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.admin-info h2 {
-  margin: 0;
-  font-size: 20px;
-  color: #333;
-}
-
-.admin-info p {
-  margin: 0;
-  font-size: 14px;
-  color: #555;
-}
-
-/* --------- DASHBOARD CONTAINER --------- */
-.container {
-  max-width: 600px;
-  margin: 40px auto;
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-/* Search Section */
-.search-box {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.search-box input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
-.search-box button {
-  padding: 10px 20px;
-  border: none;
-  background: #4CAF50;
-  color: white;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.search-box button:hover {
-  background: #45a049;
-}
-
-/* Cards */
-.card {
-  background: #f9f9f9;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-}
-
-.card h3 {
-  margin: 0;
-  color: #444;
-}
-
-/* Hide Section */
-.hidden {
-
-  /* display: none; */
-  padding: 30px;
-  border: #333 2px solid;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  width: 320px;
-  margin: 20px;
-}
-
-/* Added Users List */
-.user-list .card {
-  background: #fff;
-  border-left: 4px solid #4CAF50;
-}
-
-/* Remove Button */
-.remove-btn {
-  background: #e74c3c;
-  color: white;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: 8px;
-  transition: background 0.3s ease;
-}
-
-.remove-btn:hover {
-  background: #c0392b;
-}
-
 /* --------- LOGIN & OTP CONTAINER --------- */
 .login-container {
   background: white;
@@ -255,6 +112,136 @@ h1, h2 {
   margin-top: 10px;
   font-size: 14px;
 }
+
+/* Profile */
+
+.profile-container {
+    width: 110rem;
+    height: 50rem;
+    margin: 0;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.cover-section {
+    height: 100px;
+    width: 110rem;
+    background-color: #004182; /* Placeholder for cover */
+    position: relative;
+}
+
+.department-name {
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+    font-size: 24px;
+    color: white;
+    font-weight: bold;
+}
+
+.profile-main {
+    display: flex;
+    padding: 20px;
+}
+
+.left-column {
+    width: 65%;
+    padding-right: 20px;
+}
+
+.right-column {
+    width: 50%;
+    padding-left: 20px;
+    border-left: 2px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Push content to top and bottom */
+    height: 100%; /* Ensure it fills parent height */
+}
+
+.achievements-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-between; /* Push buttons to bottom */
+    height: 100%;
+}
+
+.achievement-buttons {
+    margin-top: 300px; /* Push buttons to the bottom */
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.left-column h2 {
+    margin-top: 10px;
+    font-size: 28px;
+}
+
+.left-column p {
+    margin: 5px 0;
+}
+
+.left-column button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #0073e6;
+    color: white;
+    font-size: 14px;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    margin-top: 300px; /* Push buttons to the bottom */
+    gap: 10px;
+}
+
+.left-column button:hover {
+    background-color: #005bb5;
+}
+
+
+.right-column h3 {
+  display: flex;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.right-column ul {
+    list-style-type: none;
+    padding-left: 10px;
+}
+
+.right-column ul li {
+    margin-bottom: 20px;
+}
+
+.right-column button {
+    margin: 5px 5px 0 0;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #0073e6;
+    color: white;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.right-column button:hover {
+    background-color: #005bb5;
+}
+
+
 
 /* --------- RESPONSIVE STYLES --------- */
 
