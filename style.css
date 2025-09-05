@@ -6,16 +6,17 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* allows scrolling if dashboard grows */
+  min-height: 100vh;
   margin: 0;
+  padding: 20px;
 }
 
-h1, h2 {
+h1,
+h2 {
   text-align: center;
   color: #333;
 }
 
-/* --------- TITLE --------- */
 .title {
   font-size: 32px;
   font-weight: bold;
@@ -47,7 +48,6 @@ h1, h2 {
 .logo.left {
   justify-content: flex-start;
 }
-
 .logo.right {
   justify-content: flex-end;
 }
@@ -56,35 +56,80 @@ h1, h2 {
   height: 60px;
 }
 
-/* --------- LOGIN & OTP CONTAINER --------- */
+/* --------- ADMIN PROFILE --------- */
+.admin-profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 2;
+  font-size: 20px;
+  gap: 20px;
+  background: #fff;
+  padding: 2%;
+  border-radius: 12px;
+  margin-top: 100px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  height: 40rem;
+  width: 95%;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-gap: 15px;
+  padding: 15px;
+  flex-grow: 1;
+}
+
+.admin-profile img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 2px solid #444;
+  position: absolute;
+  top: 30%;
+}
+
+.admin-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.admin-info h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #333;
+}
+.admin-info p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* --------- LOGIN & OTP --------- */
 .login-container {
   background: white;
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   width: 320px;
   margin: 20px;
 }
-
 .login-container h2 {
   text-align: center;
   margin-bottom: 20px;
   color: #333;
 }
-
-/* Inputs & Select */
 .login-container input,
 .login-container select {
   width: 100%;
-  padding: 10px 0px;
+  padding: 10px 0;
   margin: 10px 0;
   border: 1px solid #ddd;
   border-radius: 6px;
   font-size: 14px;
   text-align: center;
 }
-
-/* Submit Button */
 .submit-btn,
 .login-container button {
   width: 50%;
@@ -94,280 +139,149 @@ h1, h2 {
   background: #271ec9;
   color: white;
   border: none;
-  align-items: center;
   border-radius: 6px;
   cursor: pointer;
   font-size: 16px;
   transition: background 0.3s ease;
 }
-
 .submit-btn:hover,
 .login-container button:hover {
   background: #4338ca;
 }
-
-/* Message Display */
 .message {
   text-align: center;
   margin-top: 10px;
   font-size: 14px;
 }
 
-/* Profile */
-
+/* --------- PROFILE --------- */
 .profile-container {
-    width: 110rem;
-    height: 50rem;
-    margin: 0;
-    background: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  width: 105rem;
+  height: 40rem;
+  margin: 0;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-
 .cover-section {
-    height: 100px;
-    width: 110rem;
-    background-color: #004182; /* Placeholder for cover */
-    position: relative;
+  height: 100px;
+  width: 105rem;
+  background-color: #004182;
+  position: relative;
 }
-
 .department-name {
-    position: absolute;
-    bottom: 10px;
-    left: 20px;
-    font-size: 24px;
-    color: white;
-    font-weight: bold;
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  font-size: 24px;
+  color: white;
+  font-weight: bold;
 }
-
 .profile-main {
-    display: flex;
-    padding: 20px;
+  display: flex;
+  padding: 20px;
 }
-
 .left-column {
-    width: 65%;
-    padding-right: 20px;
+  width: 65%;
+  padding-right: 20px;
 }
-
-.right-column {
-    width: 50%;
-    padding-left: 20px;
-    border-left: 2px solid #ccc;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Push content to top and bottom */
-    height: 100%; /* Ensure it fills parent height */
-}
-
-.achievements-content {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    justify-content: space-between; /* Push buttons to bottom */
-    height: 100%;
-}
-
-.achievement-buttons {
-    margin-top: 300px; /* Push buttons to the bottom */
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
 .profile-pic {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
 }
-
 .left-column h2 {
-    margin-top: 10px;
-    font-size: 28px;
+  margin-top: 10px;
+  font-size: 28px;
 }
-
 .left-column p {
-    margin: 5px 0;
+  margin: 5px 0;
 }
-
+.buttoncontainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 .left-column button {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    background-color: #0073e6;
-    color: white;
-    font-size: 14px;
-    transition: 0.3s;
-    display: flex;
-    align-items: center;
-    margin-top: 300px; /* Push buttons to the bottom */
-    gap: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-top: 200px;
+  gap: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: #0073e6;
+  color: white;
+  font-size: 14px;
+  transition: 0.3s;
 }
 
 .left-column button:hover {
-    background-color: #005bb5;
+  background-color: #005bb5;
 }
 
-
-.right-column h3 {
-  display: flex;
-  justify-content: center;
-  font-size: 22px;
-  margin-bottom: 10px;
+/* --------- UPLOAD PAGE --------- */
+.container {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 75rem;
+  height: 60rem;
+  margin: 20px;
 }
 
-.right-column ul {
-    list-style-type: none;
-    padding-left: 10px;
+.container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
 }
 
-.right-column ul li {
-    margin-bottom: 20px;
+.container form {
+  padding: 20px;
+  margin-right: 15px;
 }
 
-.right-column button {
-    margin: 5px 5px 0 0;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    background-color: #0073e6;
-    color: white;
-    font-size: 14px;
-    transition: 0.3s;
+.form-group {
+  width: 100%;
+  flex-direction: column;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 20px;
 }
 
-.right-column button:hover {
-    background-color: #005bb5;
+.form-group input {
+  width: 29.33%;
+  row-gap: 20px;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #1d606e;
+  border-radius: 6px;
 }
 
-
-
-/* --------- RESPONSIVE STYLES --------- */
-
-/* Tablets and smaller laptops */
-@media (max-width: 1024px) {
-  .header {
-    width: 100%;
-    padding: 8px 15px;
-  }
-
-  .grid-container {
-    grid-template-columns: 1fr 1fr; /* 2 columns */
-  }
-
-  .admin-profile {
-    flex-direction: column;
-    height: auto;
-    padding: 20px;
-    margin-top: 90px;
-  }
+.form-group select {
+  padding: 8px 8px;
+  border-radius: 6px;
+  gap: 10px;
+  cursor: pointer;
+  background-color: #5c7ea3;
+  color: white;
+  font-size: 14px;
+  transition: 0.3s;
 }
 
-/* Mobile devices (portrait tablets & large phones) */
-@media (max-width: 768px) {
-  .grid-container {
-    grid-template-columns: 1fr; /* 1 column */
-  }
-
-  .admin-profile {
-    flex-direction: column;
-    width: 95%;
-    height: auto;
-    padding: 15px;
-  }
-
-  .admin-profile img {
-    width: 70px;
-    height: 70px;
-  }
-
-  .admin-info h2 {
-    font-size: 18px;
-  }
-
-  .admin-info p {
-    font-size: 13px;
-  }
-
-  .container {
-    width: 90%;
-    margin: 20px auto;
-    padding: 15px;
-  }
-
-  .search-box {
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .search-box button {
-    width: 100%;
-  }
-
-  .header {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .header img {
-    height: 50px;
-  }
+form button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-top: 30px;
+  margin-left: 50%;
+  gap: 10px;
+  cursor: pointer;
+  background-color: #0073e6;
+  color: white;
+  font-size: 14px;
+  transition: 0.3s;
 }
 
-/* Small phones */
-@media (max-width: 480px) {
-  .title {
-    font-size: 24px;
-    margin-bottom: 15px;
-  }
-
-  .login-container {
-    width: 90%;
-    margin: 10px auto;
-    padding: 20px;
-  }
-
-  .login-container h2 {
-    font-size: 18px;
-  }
-
-  .login-container input,
-  .login-container select {
-    font-size: 13px;
-    padding: 8px;
-  }
-
-  .submit-btn,
-  .login-container button {
-    width: 100%;
-    margin-left: 0;
-  }
-
-  .admin-profile {
-    margin-top: 70px;
-    padding: 10px;
-  }
-
-  .admin-profile img {
-    width: 60px;
-    height: 60px;
-  }
-
-  .admin-info h2 {
-    font-size: 16px;
-  }
-
-  .admin-info p {
-    font-size: 12px;
-  }
-
-  .card {
-    padding: 10px;
-  }
-
-  .card h3 {
-    font-size: 16px;
-  }
+form button:hover {
+  background-color: #005bb5;
 }
