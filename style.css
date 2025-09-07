@@ -285,3 +285,116 @@ form button {
 form button:hover {
   background-color: #005bb5;
 }
+
+/* --------- RESPONSIVE FIXES --------- */
+
+/* For large desktops (up to 1600px) */
+@media (max-width: 1600px) {
+  .profile-container,
+  .cover-section,
+  .container {
+    width: 100%;
+    margin: 50px auto;
+  }
+}
+
+/* For tablets (up to 1024px) */
+@media (max-width: 1024px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+  }
+
+  .grid-container {
+    grid-template-columns: 1fr; /* stack */
+  }
+
+  .profile-container,
+  .container {
+    width: 95%;
+    height: auto;
+    margin: 50px auto;
+  }
+
+  .profile-main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .left-column {
+    width: 100%;
+    padding: 0;
+    text-align: center;
+  }
+
+  .left-column button {
+    margin-top: 20px;
+  }
+
+  .form-group input {
+    width: 90%; /* stack inputs */
+  }
+}
+
+/* For mobile phones (up to 600px) */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  .header img {
+    height: 40px;
+  }
+
+  .admin-profile {
+    flex-direction: column;
+    padding: 10px;
+    height: auto;
+  }
+
+  .admin-profile img {
+    position: static;
+    margin-bottom: 15px;
+  }
+
+  .profile-container,
+  .container {
+    width: 100%;
+    margin: 20px auto;
+    padding: 15px;
+    height: auto;
+  }
+
+  .cover-section {
+    height: 50px;
+  }
+
+  .department-name {
+    font-size: 16px;
+  }
+
+  .profile-pic {
+    width: 100px;
+    height: 100px;
+  }
+
+  .left-column h2 {
+    font-size: 20px;
+  }
+
+  form button {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .form-group input {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  .form-group select {
+    width: 100%;
+  }
+}
