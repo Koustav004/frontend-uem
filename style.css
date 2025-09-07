@@ -346,6 +346,7 @@ form button:hover {
 
   .header img {
     height: 40px;
+    justify-content: center;
   }
 
   .admin-profile {
