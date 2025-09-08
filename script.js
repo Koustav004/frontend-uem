@@ -41,7 +41,6 @@ if (loginForm) {
     }
   });
 }
-
 // ---------- OTP LOGIC ----------
 const otpForm = document.getElementById("otpForm");
 const getOtpBtn = document.getElementById("getOtpBtn");
@@ -95,7 +94,7 @@ if (otpForm) {
     }
 
     try {
-      const res = await fetch("http://localhost:8000/auth/verifyotp", {
+      const res = await fetch("http://localhost:8000/auth/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp: enteredOTP })
@@ -106,11 +105,14 @@ if (otpForm) {
       otpMessage.style.color = data.success ? "green" : "red";
 
       if (res.ok && data.success) {
-        localStorage.setItem("jwtToken", data.token);
+        // ✅ Store tokens in sessionStorage instead of localStorage
+        sessionStorage.setItem("accessToken", data.accessToken);
+        sessionStorage.setItem("refreshToken", data.refreshToken);
 
-        const payload = JSON.parse(atob(data.token.split(".")[1]));
-        const role = payload.role || "user";
+        // ✅ Role (from backend or default user)
+        const role = data.role || "user";
 
+        // ✅ Redirect by role
         setTimeout(() => {
           if (role === "admin") {
             window.location.href = "adminDashboard.html";
