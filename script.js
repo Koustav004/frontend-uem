@@ -41,7 +41,6 @@ if (loginForm) {
     }
   });
 }
-
 // ---------- OTP LOGIC ----------
 const otpForm = document.getElementById("otpForm");
 const getOtpBtn = document.getElementById("getOtpBtn");
@@ -106,18 +105,32 @@ if (otpForm) {
       otpMessage.style.color = data.success ? "green" : "red";
 
       if (res.ok && data.success) {
-        localStorage.setItem("jwtToken", data.token);
+        const accessToken = data.accessToken;
+        const refreshToken = data.refreshToken;
 
-        const payload = JSON.parse(atob(data.token.split(".")[1]));
-        const role = payload.role || "user";
+        // Call /auth/signin (backend will decide role)
+        const signinRes = await fetch("http://localhost:8000/auth/signin", {
+          method: "POST",
+          headers: { 
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${accessToken}`
+          },
+          body: JSON.stringify({ refreshToken })
+        });
 
-        setTimeout(() => {
-          if (role === "admin") {
-            window.location.href = "adminDashboard.html";
-          } else {
-            window.location.href = "profile.html";
-          }
-        }, 1000);
+        const signinData = await signinRes.json();
+        if (signinRes.ok && signinData.success) {
+          setTimeout(() => {
+            if (signinData.role === "admin") {
+              window.location.href = "adminDashboard.html";
+            } else {
+              window.location.href = "profile.html";
+            }
+          }, 1000);
+        } else {
+          otpMessage.style.color = "red";
+          otpMessage.textContent = signinData.message || "Signin failed ❌";
+        }
       }
     } catch (err) {
       console.error("Error verifying OTP:", err);
