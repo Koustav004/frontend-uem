@@ -67,7 +67,7 @@ if (getOtpBtn) {
       if (res.ok && data.success) {
         otpMessage.style.color = "green";
         otpMessage.textContent = "OTP has been sent!";
-        alert("Your OTP is: " + data.otp); // Dev only
+        alert("Your OTP is: " + data.otp);
       } else {
         otpMessage.style.color = "red";
         otpMessage.textContent = data.message || "Failed to send OTP ❌";
@@ -94,7 +94,7 @@ if (otpForm) {
     }
 
     try {
-      const res = await fetch("http://localhost:8000/auth/verifyotp", {
+      const res = await fetch("http://localhost:8000/auth/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp: enteredOTP })
@@ -105,32 +105,18 @@ if (otpForm) {
       otpMessage.style.color = data.success ? "green" : "red";
 
       if (res.ok && data.success) {
-        const accessToken = data.accessToken;
-        const refreshToken = data.refreshToken;
+        localStorage.setItem("jwtToken", data.token);
 
-        // Call /auth/signin (backend will decide role)
-        const signinRes = await fetch("http://localhost:8000/auth/signin", {
-          method: "POST",
-          headers: { 
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${accessToken}`
-          },
-          body: JSON.stringify({ refreshToken })
-        });
+        const payload = JSON.parse(atob(data.token.split(".")[1]));
+        const role = payload.role || "user";
 
-        const signinData = await signinRes.json();
-        if (signinRes.ok && signinData.success) {
-          setTimeout(() => {
-            if (signinData.role === "admin") {
-              window.location.href = "adminDashboard.html";
-            } else {
-              window.location.href = "profile.html";
-            }
-          }, 1000);
-        } else {
-          otpMessage.style.color = "red";
-          otpMessage.textContent = signinData.message || "Signin failed ❌";
-        }
+        setTimeout(() => {
+          if (role === "admin") {
+            window.location.href = "adminDashboard.html";
+          } else {
+            window.location.href = "profile.html";
+          }
+        }, 1000);
       }
     } catch (err) {
       console.error("Error verifying OTP:", err);
@@ -203,7 +189,7 @@ if (addUserBtn) {
 // ---------- ACHIEVEMENTS (API Driven) ----------
 async function fetchAchievements() {
   try {
-    const res = await fetch("http://localhost:8000/achievement/read"); // backend route
+    const res = await fetch("http://localhost:8000/achievement"); // backend route
     const achievements = await res.json();
 
     const container = document.getElementById("achievements");
